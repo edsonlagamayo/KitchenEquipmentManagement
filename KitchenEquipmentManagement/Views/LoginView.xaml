@@ -1,145 +1,181 @@
 ﻿<Window x:Class="KitchenEquipmentManagement.Views.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:KitchenEquipmentManagement.Views"
-        mc:Ignorable="d"
         Title="Kitchen Equipment Management - Login"
-        Width="400" Height="500"
+        Width="650" Height="650"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
+
     <Grid Background="#f8f9fa">
         <Border Background="White" 
                 CornerRadius="8" 
                 Margin="30" 
                 Padding="40"
                 Effect="{StaticResource DropShadowEffect}">
-            <StackPanel>
-                <!-- Header -->
-                <TextBlock Text="Kitchen Equipment Management" 
-                           FontSize="18" 
-                           FontWeight="Bold" 
-                           HorizontalAlignment="Center" 
-                           Margin="0,0,0,10"
-                           Foreground="#2c3e50"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Header -->
+                    <TextBlock Text="Kitchen Equipment Management" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,10"
+                               Foreground="#2c3e50"/>
 
-                <TextBlock Text="Please login to continue" 
-                           FontSize="14" 
-                           HorizontalAlignment="Center" 
-                           Margin="0,0,0,30"
-                           Foreground="#6c757d"/>
+                    <TextBlock Text="Please login to continue" 
+                               FontSize="14" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,30"
+                               Foreground="#6c757d"/>
 
-                <!-- Username -->
-                <Label Content="Username:" 
-                       FontWeight="SemiBold" 
-                       Margin="0,0,0,5"/>
-                <TextBox x:Name="UsernameTextBox"
-                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
-                         Padding="10" 
-                         Height="40" 
-                         FontSize="14"
-                         BorderBrush="#ced4da"
-                         BorderThickness="1"/>
-
-                <!-- Password -->
-                <Label Content="Password:" 
-                       FontWeight="SemiBold" 
-                       Margin="0,15,0,5"/>
-                <PasswordBox x:Name="PasswordBox"
+                    <!-- Username -->
+                    <Label Content="Username:" 
+                           FontWeight="SemiBold" 
+                           Margin="0,0,0,5"/>
+                    <TextBox x:Name="UsernameTextBox"
+                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
                              Padding="10" 
                              Height="40" 
                              FontSize="14"
                              BorderBrush="#ced4da"
-                             BorderThickness="1"
-                             PasswordChanged="PasswordBox_PasswordChanged"/>
+                             BorderThickness="1"/>
 
-                <!-- Error Message -->
-                <TextBlock Text="{Binding ErrorMessage}" 
-                           Foreground="Red" 
-                           FontSize="12" 
-                           Margin="0,10,0,0"
-                           TextWrapping="Wrap"
-                           Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
+                    <!-- Password -->
+                    <Label Content="Password:" 
+                           FontWeight="SemiBold" 
+                           Margin="0,15,0,5"/>
+                    <PasswordBox x:Name="PasswordBox"
+                                 Padding="10" 
+                                 Height="40" 
+                                 FontSize="14"
+                                 BorderBrush="#ced4da"
+                                 BorderThickness="1"
+                                 PasswordChanged="PasswordBox_PasswordChanged"/>
 
-                <!-- Login Button -->
-                <Button Content="Login" 
-                        Command="{Binding LoginCommand}"
-                        Height="45" 
-                        Margin="0,20,0,0"
-                        Background="#007bff"
-                        Foreground="White"
-                        BorderThickness="0"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        Cursor="Hand"
-                        IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#0056b3"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                    <!-- Error Message -->
+                    <TextBlock Text="{Binding ErrorMessage}" 
+                               Foreground="Red" 
+                               FontSize="12" 
+                               Margin="0,10,0,0"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
 
-                <!-- Progress Bar -->
-                <ProgressBar IsIndeterminate="{Binding IsLoading}" 
-                             Height="4" 
-                             Margin="0,10,0,0"
-                             Background="Transparent"
-                             Foreground="#007bff"
-                             Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    <!-- Login Button -->
+                    <Button Content="Login" 
+                            Command="{Binding LoginCommand}"
+                            Click="LoginButton_Click"
+                            Height="45" 
+                            Margin="0,20,0,0"
+                            Background="#007bff"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Cursor="Hand"
+                            IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#0056b3"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
 
-                <!-- Divider -->
-                <Border Height="1" 
-                        Background="#e9ecef" 
-                        Margin="0,30,0,20"/>
+                    <!-- Progress Bar -->
+                    <ProgressBar IsIndeterminate="{Binding IsLoading}" 
+                                 Height="4" 
+                                 Margin="0,10,0,0"
+                                 Background="Transparent"
+                                 Foreground="#007bff"
+                                 Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-                <!-- Signup Button -->
-                <Button Content="Create New Account" 
-                        Command="{Binding SignupCommand}"
-                        Height="40" 
-                        Background="Transparent"
-                        Foreground="#6c757d"
-                        BorderBrush="#6c757d"
-                        BorderThickness="1"
-                        FontSize="13"
-                        Cursor="Hand">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#f8f9fa"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                    <!-- OR Divider -->
+                    <Grid Margin="0,30,0,20">
+                        <Border Height="1" Background="#e9ecef" VerticalAlignment="Center"/>
+                        <TextBlock Text="OR" 
+                                   Background="White" 
+                                   Padding="15,0" 
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="12"
+                                   Foreground="#6c757d"/>
+                    </Grid>
 
-                <!-- Exit Button -->
-                <Button Content="Exit" 
-                        Command="{Binding ExitCommand}"
-                        Height="35" 
-                        Margin="0,10,0,0"
-                        Background="Transparent"
-                        Foreground="#dc3545"
-                        BorderThickness="0"
-                        FontSize="12"
-                        Cursor="Hand">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="#c82333"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </StackPanel>
+                    <!-- Signup Section - More Prominent -->
+                    <TextBlock Text="Don't have an account?" 
+                               HorizontalAlignment="Center" 
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="#2c3e50"
+                               Margin="0,0,0,15"/>
+
+                    <!-- Main Signup Button -->
+                    <Button Content="🆕 CREATE NEW ACCOUNT" 
+                            Command="{Binding SignupCommand}"
+                            Height="45" 
+                            Background="#28a745"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#218838"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                   
+
+                    <!-- Exit Button -->
+                    <Button Content="Exit Application" 
+                            Command="{Binding ExitCommand}"
+                            Height="35" 
+                            Margin="0,20,0,0"
+                            Background="Transparent"
+                            Foreground="#dc3545"
+                            BorderThickness="0"
+                            FontSize="12"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#c82333"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Quick Test Default Credentials -->
+                    <Border Background="#e3f2fd" 
+                            CornerRadius="4" 
+                            Padding="10" 
+                            Margin="0,20,0,0">
+                        <StackPanel>
+                            <TextBlock Text="🔑 Default Test Credentials:" 
+                                       FontSize="12" 
+                                       FontWeight="SemiBold" 
+                                       Foreground="#1565c0"/>
+                            <TextBlock Text="SuperAdmin: admin / admin123" 
+                                       FontSize="11" 
+                                       Foreground="#1976d2"/>
+                            <TextBlock Text="Admin: john / password123" 
+                                       FontSize="11" 
+                                       Foreground="#1976d2"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
     </Grid>
 </Window>

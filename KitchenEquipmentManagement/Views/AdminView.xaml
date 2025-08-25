@@ -61,6 +61,11 @@
                             Command="{Binding EquipmentCommand}"
                             Style="{StaticResource HeaderButtonStyle}"/>
 
+                    <Button Content="Site Equipment" 
+                            Command="{Binding SiteEquipmentCommand}"
+                            Style="{StaticResource HeaderButtonStyle}"
+                            ToolTip="Assign equipment to sites"/>
+
                     <Button Content="Logout" 
                             Command="{Binding LogoutCommand}" 
                             Background="#dc3545"

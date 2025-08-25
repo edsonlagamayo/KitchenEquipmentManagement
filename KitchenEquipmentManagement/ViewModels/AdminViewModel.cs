@@ -19,8 +19,10 @@ namespace KitchenEquipmentManagement.ViewModels
             _authService = authService;
 
             UsersCommand = new RelayCommand(ShowUsers, CanAccessUsers);
+            UserManagementWindowCommand = new RelayCommand(ShowUserManagementWindow, CanAccessUsers);
             SitesCommand = new RelayCommand(ShowSites);
             EquipmentCommand = new RelayCommand(ShowEquipment);
+            SiteEquipmentCommand = new RelayCommand(ShowSiteEquipment);
             LogoutCommand = new RelayCommand(Logout);
 
             LoadUserInfo();
@@ -47,8 +49,10 @@ namespace KitchenEquipmentManagement.ViewModels
         public bool IsSuperAdmin => _authService.CurrentUser?.UserType == "SuperAdmin";
 
         public ICommand UsersCommand { get; }
+        public ICommand UserManagementWindowCommand { get; }
         public ICommand SitesCommand { get; }
         public ICommand EquipmentCommand { get; }
+        public ICommand SiteEquipmentCommand { get; }
         public ICommand LogoutCommand { get; }
 
         private void LoadUserInfo()
@@ -79,6 +83,20 @@ namespace KitchenEquipmentManagement.ViewModels
             }
         }
 
+        private void ShowUserManagementWindow()
+        {
+            if (IsSuperAdmin)
+            {
+                var userManagementWindow = new UserManagementWindow();
+                userManagementWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Access denied. Only SuperAdmins can manage users.",
+                              "Access Denied", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
         private void ShowSites()
         {
             CurrentContent = new SiteMaintenanceView();
@@ -87,6 +105,11 @@ namespace KitchenEquipmentManagement.ViewModels
         private void ShowEquipment()
         {
             CurrentContent = new EquipmentMaintenanceView();
+        }
+
+        private void ShowSiteEquipment()
+        {
+            CurrentContent = new SiteEquipmentOverviewView();
         }
 
         private void Logout()

@@ -93,12 +93,34 @@ namespace KitchenEquipmentManagement.ViewModels
 
         private void ShowSignup()
         {
-            System.Diagnostics.Debug.WriteLine("ShowSignup called");
-            var signupWindow = new SignupView();
-            signupWindow.Show();
+            System.Diagnostics.Debug.WriteLine("ShowSignup called from LoginViewModel");
 
-            // Close login window
-            Application.Current.Windows.OfType<LoginView>().FirstOrDefault()?.Close();
+            try
+            {
+                var signupWindow = new SignupView();
+                System.Diagnostics.Debug.WriteLine("SignupView created successfully");
+
+                signupWindow.Show();
+                System.Diagnostics.Debug.WriteLine("SignupView.Show() called");
+
+                // Close login window
+                var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
+                if (loginWindow != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Closing LoginView");
+                    loginWindow.Close();
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("LoginView not found in current windows");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in ShowSignup: {ex.Message}");
+                MessageBox.Show($"Error opening signup window: {ex.Message}", "Error",
+                              MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ExitApplication()

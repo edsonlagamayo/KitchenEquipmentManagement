@@ -75,15 +75,16 @@
                                 Orientation="Horizontal" 
                                 HorizontalAlignment="Right" 
                                 Margin="0,15,0,0">
-                        <Button Content="Edit" 
+                        <Button Content="Edit Site" 
                                 Command="{Binding EditCommand}"
                                 Style="{StaticResource PrimaryButtonStyle}"
                                 Margin="0,0,10,0"/>
-                        <Button Content="Equipment" 
+                        <Button Content="Manage Equipment" 
                                 Command="{Binding EditSiteEquipmentCommand}"
                                 Style="{StaticResource InfoButtonStyle}"
-                                Margin="0,0,10,0"/>
-                        <Button Content="Delete" 
+                                Margin="0,0,10,0"
+                                ToolTip="Assign or remove equipment from this site"/>
+                        <Button Content="Delete Site" 
                                 Command="{Binding DeleteCommand}"
                                 Style="{StaticResource DangerButtonStyle}"/>
                     </StackPanel>

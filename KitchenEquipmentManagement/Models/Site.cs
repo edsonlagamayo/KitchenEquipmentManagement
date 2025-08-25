@@ -28,5 +28,9 @@ namespace KitchenEquipmentManagement.Models
 
         [NotMapped]
         public string Status => Active ? "Active" : "Inactive";
+
+        [NotMapped]
+        public int WorkingEquipmentCount => RegisteredEquipments?
+            .Count(re => re.Equipment?.Condition == "Working") ?? 0;
     }
 }
